@@ -1,17 +1,17 @@
 
-<div>
-  <center>
-    <img width="120" src="docs/assets/images/logo.png" />
-  </center>
-</div>
+<p align="center">
+  <img width="120" src="docs/assets/images/logo.png" />
+</p>
 
 # GOGUE Transpiler | Capsule
+
 	__
 	Transpile a capsule (.cap) file to covert it
 	into a pure php file for the V feature of the 
 	application flux.
 
 ## Todos 
+
 	- 
 
 ### 21/06/2020 22:06
