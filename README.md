@@ -1,3 +1,8 @@
+
+<div>
+  <img src="docs/assets/images/logo.png" />
+</div>
+
 # GOGUE Transpiler | Capsule
 	__
 	Transpile a capsule (.cap) file to covert it
