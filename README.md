@@ -1,6 +1,12 @@
 
 <p align="center">
-  <img width="120" src="docs/assets/images/logo.png" />
+  <img width="220" src="docs/assets/images/logo.png" />
+</p>
+
+<p align="center">XML Parser for capsule gogue plugin.</p>
+
+<p align="center">
+  <img alt="APM badge" src="https://img.shields.io/badge/license-MIT-green?style=for-the-badge" />  
 </p>
 
 # GOGUE Transpiler | Capsule
