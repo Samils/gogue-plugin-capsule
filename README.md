@@ -1,6 +1,8 @@
 
-<div style="text-align: center;width: 100%;display: block;">
-  <img width="120" src="docs/assets/images/logo.png" />
+<div>
+  <center>
+    <img width="120" src="docs/assets/images/logo.png" />
+  </center>
 </div>
 
 # GOGUE Transpiler | Capsule
