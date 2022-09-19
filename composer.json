@@ -1,6 +1,6 @@
 {
 	"name": "php_modules/gogue-plugin-capsule",
-	"version": "1.0",
+	"version": "1.0.0",
 	"description": "XML Parser for capsule gogue plugin",
   "type": "library",
 	"license": "MIT",
@@ -39,12 +39,6 @@
     "wiki": "https://github.com/samils/gogue-plugin-capsule/wiki"
   },
 	"require": {
-		"php": ">=5.6.20",
-		"php_modules/core": "^1.0.2",
-    "php_modules/gogue-component-base": "^1.0.0",
-    "php_modules/gogue-component-config": "^1.0.0",
-    "php_modules/gogue-component-transpiler": "^1.0.0",
-    "php_modules/gogue-plugin-capsule-xml-parser": "^1.0.0",
-    "php_modules/include-all": "^1.0.5"
+		"php": ">=5.6.20"
 	}
 }
