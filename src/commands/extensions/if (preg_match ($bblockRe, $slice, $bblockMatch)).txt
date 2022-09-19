@@ -1,0 +1,67 @@
+$bblockRe = '/^(::\\=block-block([0-9]+)::)$/i';
+
+if (preg_match ($bblockRe, $slice, $bblockMatch)) {
+
+  $importationBlockEncapsulated = ( boolean ) (
+    !($as === trim ( $slice ))
+  );
+
+  $slice = trim (preg_replace ('/^(\s*\{\s*)/', '',
+    preg_replace ('/(\s*\}\s*)$/', '',
+      $obj->decodeWholeBlocks ($slice)
+    )
+  ));
+
+  $slice = preg_replace ('/\s{2,}/', ' ', $slice);
+
+  if ( !$importationBlockEncapsulated ) {
+    $finalCode .= import_from ($from, $slice, $obj, false);
+
+    continue;
+  } else {
+
+    $sliceSlices = preg_split ($commaRe, $slice);
+
+    $refArray = '[ ';
+
+    foreach ($sliceSlices as $sliceSlice) {
+      /**
+       * Verify
+       */
+      if (preg_match ($asCommandRe, $sliceSlice, $sliceAsMatch)) {
+        /**
+         * [$sliceSlice description]
+         * @var string
+         */
+        $sliceSlice = trim (preg_replace (
+          $asCommandRe, '',
+          $sliceSlice
+        ));
+
+
+        $refArray .= ("'{$sliceSlice}' => '{$sliceAsMatch[2]}', ");
+
+      } else {
+        $refArray .= ("'{$sliceSlice}', ");
+      }
+    }
+
+    $refArray = (preg_replace ('/(\s*,\s*)$/', '', $refArray) . ' ]');
+
+    #echo "\n\n\n", $refArray;
+
+
+    #exit ("\n\n\n$as\n\n");
+
+    /**
+     * [$capsuleRef]
+     * @var string
+     */
+    $capsuleRef = (
+      /**
+       * Capsule Import Reference
+       */
+      "['$as' => $refArray]"
+    );
+  }
+}

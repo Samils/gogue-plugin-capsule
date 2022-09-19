@@ -1,0 +1,142 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "5b7a88de0534e9f05a89e982fdd6393c",
+    "packages": [],
+    "packages-dev": [
+        {
+            "name": "php_modules/core",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-module/php-module.git",
+                "reference": "9c2ec56291da5da7d6ae6e4ec71f954b5efe4aa1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-module/php-module/zipball/9c2ec56291da5da7d6ae6e4ec71f954b5efe4aa1",
+                "reference": "9c2ec56291da5da7d6ae6e4ec71f954b5efe4aa1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.20"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "Sammy\\Packs\\"
+                ],
+                "files": [
+                    "autoload.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Agostinho Lopes",
+                    "email": "agostinhosaml832@gmail.com",
+                    "homepage": "https://agostinhosamil.github.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A differnt way for modularising php scripts.",
+            "homepage": "https://github.com/php-modules/php-module",
+            "keywords": [
+                "Sammy",
+                "Sammy-Packs",
+                "modular",
+                "modular-php",
+                "module",
+                "module-php",
+                "modules",
+                "modules-php",
+                "packs",
+                "php",
+                "php-module",
+                "php-modules"
+            ],
+            "support": {
+                "email": "base.samils@gmail.com",
+                "issues": "https://github.com/php-module/php-module/issues",
+                "source": "https://github.com/php-module/php-module/tree/v1.0.2",
+                "wiki": "https://github.com/php-module/php-module/wiki"
+            },
+            "time": "2021-05-17T16:03:59+00:00"
+        },
+        {
+            "name": "php_modules/include-all",
+            "version": "1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-module/include-all.git",
+                "reference": "4763b31565cee7b45f94f029822395fe353a53ef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-module/include-all/zipball/4763b31565cee7b45f94f029822395fe353a53ef",
+                "reference": "4763b31565cee7b45f94f029822395fe353a53ef",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.20",
+                "php_modules/core": "^1.0.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Sammy\\Packs\\": "src/"
+                },
+                "psr-4": {
+                    "Sammy\\Packs\\": "src/"
+                },
+                "classmap": [
+                    "src/index.php",
+                    "src/Sammy/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Agostinho Lopes",
+                    "email": "agostinhosaml832@gmail.com",
+                    "homepage": "https://agostinhosamil.github.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A small and simple class to automatically include whole the directories and subdirectories files in php.",
+            "homepage": "https://github.com/php-modules/include-all",
+            "keywords": [
+                "autoload",
+                "bootstrap",
+                "directories",
+                "directory",
+                "include",
+                "include-all"
+            ],
+            "support": {
+                "email": "base.samils@gmail.com",
+                "issues": "https://github.com/php-module/include-all/issues",
+                "source": "https://github.com/php-module/include-all/tree/v1.0.5",
+                "wiki": "https://github.com/php-module/include-all/wiki"
+            },
+            "time": "2021-05-18T07:45:01+00:00"
+        }
+    ],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
+}
