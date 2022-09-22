@@ -18,10 +18,15 @@
 		"gogue-plugin-capsule-xml-parser"
 	],
 	"autoload": {
-		"psr-4": { "Sammy\\": "Sammy/" },
-		"psr-0": { "Sammy\\": "Sammy/" },
-		"classmap": [ "Sammy/" ],
-		"files": [ "autoload.php" ]
+		"psr-4": {
+      "Sammy\\": "Sammy/"
+    },
+		"psr-0": {
+      "Sammy\\": "Sammy/"
+    },
+		"files": [
+      "autoload.php"
+    ]
 	},
   "homepage": "https://github.com/samils/gogue-plugin-capsule",
   "readme": "./README.md",
