@@ -33,8 +33,6 @@
 namespace Sammy\Packs\Gogue\Transpiler\Capsule {
   use php\module as phpmodule;
 
-  include_once __DIR__ . '/autoload';
-
   $capsuleTranspiler = function ($capsuleFile) {
     $capsuleCode = null;
 
