@@ -556,11 +556,25 @@ namespace Sammy\Packs\Gogue\Transpiler\Capsule\XMLReader\Decoder {
           $currentLine = $this->escapeStringChars (
             $currentLine
           );
-          $stringChildrenList .= ", '{$currentLine}'";
+
+          $strData = $this->readRawStr ($currentLine);
+
+          $stringChildrenList .= ", $strData";
         }
       }
 
       return $stringChildrenList;
+    }
+
+    /**
+     * @method string readRawStr
+     */
+    private function readRawStr (string $rawStr) {
+      if (preg_match ('/^::\$([0-9]+):$/', $rawStr)) {
+        return $rawStr;
+      }
+
+      return "'$rawStr'";
     }
   }}
 }
