@@ -528,6 +528,10 @@ namespace Sammy\Packs\Gogue\Transpiler\Capsule\XMLReader\Decoder {
 
     private function readCapsuleStringChild ($line) {
       $linePregSplittingCallback = function ($match) {
+    private function linePregSplittingCallback ($match, $decode = false) {
+      static $store = [];
+
+      if (!$decode && is_array ($match)) {
         $bindiInterpolation = (string)($match [0]);
 
         return "\n{$bindiInterpolation}\n";
