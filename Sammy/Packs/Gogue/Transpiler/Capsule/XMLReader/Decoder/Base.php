@@ -526,22 +526,75 @@ namespace Sammy\Packs\Gogue\Transpiler\Capsule\XMLReader\Decoder {
       );
     }
 
-    private function readCapsuleStringChild ($line) {
-      $linePregSplittingCallback = function ($match) {
     private function linePregSplittingCallback ($match, $decode = false) {
       static $store = [];
 
       if (!$decode && is_array ($match)) {
         $bindiInterpolation = (string)($match [0]);
 
-        return "\n{$bindiInterpolation}\n";
-      };
+        $bindiInterpolationId = join ('', [
+          rand(0, 999999999), time(), date('YmdHis')
+        ]);
+
+        $bindiInterpolationBody = join ('', ['::bib:', $bindiInterpolationId, ':']);
+
+        $store [$bindiInterpolationId] = $bindiInterpolation;
+
+        return "\n{$bindiInterpolationBody}\n";
+      } elseif (is_string ($match) && $decode) {
+        $bindiInterpolationId = trim ($match);
+
+        if (isset ($store [$bindiInterpolationId])) {
+          return $this->decodeBindingIterpolationsFromStr ($store [$bindiInterpolationId]);
+        }
+      }
+    }
+
+    private function decodeBindingIterpolationsFromStr ($string) {
+      $re = '/::bib:([0-9]+):/i';
+
+      return preg_replace_callback ($re, function ($match) {
+        #echo "\n\ndecodeBindingIterpolationsFromStr\n\n";
+
+        return $this->linePregSplittingCallback ($match [1], true);
+      }, $string);
+    }
+
+    private function decodeBlocksInString ($match) {
+      $id = (int)($match [ 2 ]);
+
+      if (!isset (self::$blockStore [$id])) {
+        return $match [0];
+      }
+
+      $blockDatas = self::$blockStore [$id];
+
+      $blockContent = $blockDatas [0];
+
+      $blockContent = preg_replace_callback (
+        $this->bindingInterpolationRe,
+        [$this, 'linePregSplittingCallback'],
+        $blockContent
+      );
+
+      return $this->decodeWholeBlocks ($blockContent, [$this, 'decodeBlocksInString']);
+    }
+
+    private function readCapsuleStringChild ($line) {
 
       $line = preg_replace_callback (
         $this->bindingInterpolationRe,
-        $linePregSplittingCallback,
+        [$this, 'linePregSplittingCallback'],
         $line
       );
+
+      $line = preg_replace_callback (
+        $this->bindingInterpolationRe,
+        [$this, 'linePregSplittingCallback'],
+        $this->decodeWholeBlocks ($line, [$this, 'decodeBlocksInString'])
+      );
+
+      #echo "Str => ", $line, "\n\n";
 
       $stringChildrenList = '';
       $lineMap = preg_split ("/\n+/", trim ($line));
@@ -550,12 +603,18 @@ namespace Sammy\Packs\Gogue\Transpiler\Capsule\XMLReader\Decoder {
       for ($i = 0; $i < $lineMapCount; $i++) {
         $currentLine = $lineMap [ $i ];
 
-        if (preg_match ($this->bindingInterpolationRe, $currentLine, $match)) {
-          $childbody = $this->decodeCapsuleBindingIterpolationsMT (
-            $match, [ 'del' => false ]
-          );
+        if (empty (trim ($currentLine))) {
+          continue;
+        } elseif (preg_match ('/::bib:([0-9]+):/i', $currentLine, $match)) {
+          $childbody = $this->decodeBindingIterpolationsFromStr ($match [0]);
 
-          $stringChildrenList .= ", function(\$args, CapsuleScopeContext \$scope){return {$childbody};}";
+          if (preg_match ($this->bindingInterpolationRe, $childbody, $bindiInterpolationMatch)) {
+            $childbody = $this->decodeCapsuleBindingIterpolationsMT (
+              $bindiInterpolationMatch, [ 'del' => false ]
+            );
+
+            $stringChildrenList .= ", function(\$args, CapsuleScopeContext \$scope){return {$childbody};}";
+          }
         } else {
           $currentLine = $this->escapeStringChars (
             $currentLine
@@ -567,7 +626,7 @@ namespace Sammy\Packs\Gogue\Transpiler\Capsule\XMLReader\Decoder {
         }
       }
 
-      return $stringChildrenList;
+      return $this->decodeBindingIterpolationsFromStr ($stringChildrenList);
     }
 
     /**
