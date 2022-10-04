@@ -145,7 +145,7 @@ namespace Sammy\Packs\Gogue\Transpiler\Capsule {
 
 
     private function getBlockEndInPartialCode ($partialCode, $block, $point) {
-      $codeLen = strlen($partialCode);
+      $codeLen = strlen ($partialCode);
       # Get the end of the given block in the
       # given position.
       # While doing that, get others possible
@@ -227,6 +227,14 @@ namespace Sammy\Packs\Gogue\Transpiler\Capsule {
           }
         }
       }
+
+      $endPoint = ($i - $point) + strlen ($block [1]) + 1;
+
+      return [
+        substr ($partialCode, $point - 1, $endPoint),
+        'start' => $point - 1,
+        'end' =>  $endPoint
+      ];
     }
 
 
@@ -255,6 +263,8 @@ namespace Sammy\Packs\Gogue\Transpiler\Capsule {
                 $syntax,
                 $i + 1
               );
+
+              $blockBody = array_merge (['start' => $i + 1, 'end' => strlen ($partialCode)], $blockBody);
 
               #if (!$blockBody)
               #   continue;
