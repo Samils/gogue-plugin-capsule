@@ -480,11 +480,9 @@ namespace Sammy\Packs\Gogue\Transpiler\Capsule {
       return trim ($this->decodeWholeBlocks ($blockDatas [0]));
     }
 
-    function decodeWholeBlocks ($code) {
     function decodeWholeBlocks ($code, array $callback = null) {
       $re = '/::=(array|block|group)-block([0-9]+)::/i';
 
-      return preg_replace_callback ($re, [$this, 'decodeWholeBlocksMT'], $code);
       if (is_null ($callback)) {
         $callback = [$this, 'decodeWholeBlocksMT'];
       }
